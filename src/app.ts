@@ -11,6 +11,10 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 10102;
 
+import citas from './router/citas';
+
+app.use('/citas', citas)
+
 app.listen(PORT, () => {
   console.log("Servidor ejecutándose en el puerto: ", PORT);
 }).on("error", (error) => {
