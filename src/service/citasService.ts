@@ -5,7 +5,7 @@ export default class CitaService {
 
     }
 
-    async getHora(horaCita : Date){
-        return await CitasRepository.getHoras(horaCita)
+    async getHora(fechaCita : string){
+        return await CitasRepository.getHoras(fechaCita)
     }
 }

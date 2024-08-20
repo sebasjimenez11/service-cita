@@ -8,10 +8,11 @@ const crearCitaController = async (req: Request, res: Response) =>{
 
 export const getHoraController = async (req:Request, res:Response)=>{
     try {
-        const {Fecha_Cita} = req.body;
-        const getHora = service.getHora(Fecha_Cita);
-        res.status(200).json({horas: [getHora]})
+        const fechaCita = req.query.fechaCita as string;
+        const getHora = await service.getHora(fechaCita);
+        res.status(200).json(getHora); // Devuelve el objeto { horas: [...] }
     } catch (error) {
-        res.status(500).json({message:"error interno del servidor"})
+        console.error(error.message);
+        res.status(500).json({ message: 'Error al obtener las horas' });
     }
 }
