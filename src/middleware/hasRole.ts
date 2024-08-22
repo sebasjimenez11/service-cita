@@ -20,6 +20,7 @@ const hasRole = (roles: Rol[]) => {
 };
 
 export const isAdminOrDoctor = hasRole(['admin', 'medico']);
+export const isAdminOrPatient = hasRole(['admin', 'paciente']);
 export const isDoctor = hasRole(['medico']);
 export const isAdmin = hasRole(['admin']);
-export const isPatient = hasRole(['paciente'])
+export const isPatient = hasRole(['paciente']);
