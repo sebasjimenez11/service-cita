@@ -5,18 +5,12 @@ export default class CitaDto {
     private _fKIdDoct: string;
     private _fKIdPac: string;
 
-    constructor(
-        horaCita: string,
-        fechaCita: Date,
-        fKIdDoct: string,
-        fKIdPac: string,
-        codigoCita?: number
-    ) {
-        this.codigoCita = codigoCita;
-        this.horaCita = horaCita;
-        this.fechaCita = fechaCita;
-        this.fKIdDoct = fKIdDoct;
-        this.fKIdPac = fKIdPac;
+    constructor() {
+        this.codigoCita = this.codigoCita;
+        this.horaCita = this.horaCita;
+        this.fechaCita = this.fechaCita;
+        this.fKIdDoct = this.fKIdDoct;
+        this.fKIdPac = this.fKIdPac;
     }
 
     get codigoCita(): number | undefined {

@@ -5,5 +5,5 @@ const controller = new pagoController();
 
 const router = Router();
 
-router.post('/',);
+router.post('/create', controller.crearPago);
 export default router;

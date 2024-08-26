@@ -1,11 +1,11 @@
 import db from '../config/configBd';
-import CitaDto from '../Dto/citaDto';
+import CitaDto from '../Dto/cita/citaDto';
 
 export default class CitasRepository {
     
-    static async crearCita(cita : CitaDto){
+    async crearCita(cita : CitaDto){
         try {
-            const row = await db.execute('CALL RescheduleAppointment(?,?,?,?)', [
+            const row = await db.execute('CALL CreateAppointment(?,?,?,?)', [
                 cita.horaCita,
                 cita.fechaCita,
                 cita.fKIdDoct,
@@ -13,22 +13,23 @@ export default class CitasRepository {
             ]);
             return {create:true, message: 'creacion de cita exitoso'};
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
             return {create:false, message: error.message};
         }
     }
 
-    static async getHoras(fecha: string){
+    async getHoras(fecha: string){
         try {
-            const row = await db.execute('SELECT Hora_Cita FROM cita WHERE Fecha_Cita = ?',[fecha]);
-            return {horas:row[0]};
+            const [rows]: any = await db.execute('SELECT Hora_Cita FROM cita WHERE Fecha_Cita = ?', [fecha]);
+            const horas = rows.map(row => row.Hora_Cita);
+        return { horas };
         } catch (error) {
             console.log(error.message);
             throw new Error('Error fetching hours'); 
         }
     }
 
-    static async deleteCita(Id: string) {
+    async deleteCita(Id: string) {
         try {
             const row = await db.execute('CALL ',[Id]);
             return {delete: true, message: 'eliminacion de cita exitosa'};
@@ -38,7 +39,7 @@ export default class CitasRepository {
         }
     }
 
-    static async updateStatus(codigoCita: string){
+    async updateStatus(codigoCita: string){
         try {
             
         } catch (error) {
@@ -46,7 +47,7 @@ export default class CitasRepository {
         }
     }
 
-    static async RescheduleAppointment(codigoCita: string){
+    async RescheduleAppointment(codigoCita: string){
         try {
             
             
