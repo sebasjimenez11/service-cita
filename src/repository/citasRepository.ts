@@ -37,4 +37,21 @@ export default class CitasRepository {
             return {create:false, message: error.message};
         }
     }
+
+    static async updateStatus(codigoCita: string){
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+
+    static async RescheduleAppointment(codigoCita: string){
+        try {
+            
+            
+        } catch (error) {
+            
+        }
+    }
 }
