@@ -3,23 +3,23 @@ export default class EmailDto {
     private _buttonUrl: string;
     private _title: string;
     private _recipients: string;
-    private _emailType: string;
     private _buttonText: string;
+    private _img: string;
 
     constructor(
         message: string,
         buttonUrl: string,
         title: string,
         recipients: string,
-        emailType: string,
-        buttonText: string
+        buttonText: string,
+        img : string
     ) {
         this.message = message;
         this.buttonUrl = buttonUrl;
         this.title = title;
         this.recipients = recipients;
-        this.emailType = emailType;
         this.buttonText = buttonText;
+        this.img = img
     }
 
     get message(): string {
@@ -54,19 +54,19 @@ export default class EmailDto {
         this._recipients = recipients;
     }
 
-    get emailType(): string {
-        return this._emailType;
-    }
-
-    set emailType(emailType: string) {
-        this._emailType = emailType;
-    }
-
     get buttonText(): string {
         return this._buttonText;
     }
 
     set buttonText(buttonText: string) {
         this._buttonText = buttonText;
+    }
+
+    get img(): string {
+        return this._img;
+    }
+
+    set img(img: string) {
+        this._img = img;
     }
 }

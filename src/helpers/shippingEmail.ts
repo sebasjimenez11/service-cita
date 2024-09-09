@@ -8,7 +8,7 @@ const azuereShippingEmail = (email: EmailDto)=>{
             buttonUrl: email.buttonUrl,
             title: email.title,
             recipients: email.recipients,
-            emailType: email.emailType,
+            img: email.img,
             buttonText: email.buttonText
         })
     } catch (error) {

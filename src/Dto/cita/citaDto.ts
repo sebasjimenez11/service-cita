@@ -1,6 +1,6 @@
 export default class CitaDto {
     private _codigoCita?: number;
-    private _horaCita: string; // Using string to represent TIME
+    private _horaCita: string; 
     private _fechaCita: Date;
     private _fKIdDoct: string;
     private _fKIdPac: string;

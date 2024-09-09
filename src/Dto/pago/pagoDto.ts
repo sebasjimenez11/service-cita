@@ -1,16 +1,18 @@
 export default class PagoDto {
     private _codigoPago?: number;
-    private _estado: 'pago' | 'pendiente' | 'rechazado';
+    private _estado: string;
     private _descripcion?: string;
     private _fechaHora: Date;
     private _valor: number;
     private _fKCodigoCita: number;
-    private _metodoPago: 'virtual' | 'fisico';
-    private _transaccionId?: string;
-    private _referenciaPago?: string;
-    private _medioPago?: string;
-    private _estadoTransaccion?: string;
-    private _detalleRespuesta?: string;
+    private _metodoPago: string; // Método de pago (e.g., "ePayco", "Efectivo")
+    private _transaccionId?: string; // ID de la transacción (aplica para ePayco)
+    private _referenciaPago?: string; // Referencia interna del pago (aplica para ePayco y otros)
+    private _medioPago?: string; // Medio de pago o franquicia (solo ePayco)
+    private _estadoTransaccion?: string; // Estado detallado de la transacción (solo ePayco)
+    private _detalleRespuesta?: string; // Detalle de la respuesta del pago (solo ePayco)
+    private _esPagoEfectivo: boolean; // Indica si es un pago en efectivo
+    tipoPago: string;
 
     constructor() {
         this.codigoPago = this.codigoPago;
@@ -25,6 +27,7 @@ export default class PagoDto {
         this.medioPago = this.medioPago;
         this.estadoTransaccion = this.estadoTransaccion;
         this.detalleRespuesta = this.detalleRespuesta;
+        this.esPagoEfectivo = this.esPagoEfectivo;
     }
 
     get codigoPago(): number | undefined {
@@ -35,11 +38,11 @@ export default class PagoDto {
         this._codigoPago = codigoPago;
     }
 
-    get estado(): 'pago' | 'pendiente' | 'rechazado' {
+    get estado(): string {
         return this._estado;
     }
 
-    set estado(estado: 'pago' | 'pendiente' | 'rechazado') {
+    set estado(estado: string) {
         this._estado = estado;
     }
 
@@ -75,11 +78,11 @@ export default class PagoDto {
         this._fKCodigoCita = fKCodigoCita;
     }
 
-    get metodoPago(): 'virtual' | 'fisico' {
+    get metodoPago(): string {
         return this._metodoPago;
     }
 
-    set metodoPago(metodoPago: 'virtual' | 'fisico') {
+    set metodoPago(metodoPago: string) {
         this._metodoPago = metodoPago;
     }
 
@@ -121,5 +124,13 @@ export default class PagoDto {
 
     set detalleRespuesta(detalleRespuesta: string | undefined) {
         this._detalleRespuesta = detalleRespuesta;
+    }
+
+    get esPagoEfectivo(): boolean {
+        return this._esPagoEfectivo;
+    }
+
+    set esPagoEfectivo(esPagoEfectivo: boolean) {
+        this._esPagoEfectivo = esPagoEfectivo;
     }
 }

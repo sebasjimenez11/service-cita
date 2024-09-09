@@ -7,7 +7,6 @@ const hasRole = (roles: Rol[]) => {
         try {
             const rol: Rol = req.body.tokenRol;  
             if (roles.includes(rol)) {
-                delete req.body.tokenRol;
                 next();
             } else {
                 res.status(403).json({ status: "Acceso denegado: rol insuficiente" });
@@ -21,6 +20,7 @@ const hasRole = (roles: Rol[]) => {
 
 export const isAdminOrDoctor = hasRole(['admin', 'medico']);
 export const isAdminOrPatient = hasRole(['admin', 'paciente']);
+export const isAdminOrPatientOrDoctor = hasRole(['admin', 'paciente', 'medico']);
 export const isDoctor = hasRole(['medico']);
 export const isAdmin = hasRole(['admin']);
 export const isPatient = hasRole(['paciente']);

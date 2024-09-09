@@ -22,6 +22,7 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
         let decoden = jwt.verify(token, process.env.JWT_SECRET as string) as payload; 
         req.body.ID = decoden.data.ID;
         req.body.tokenRol = decoden.data.rol;
+        req.body.emailToken = decoden.data.email;
         next();
     } catch (error) {
         return res.status(403).json(
