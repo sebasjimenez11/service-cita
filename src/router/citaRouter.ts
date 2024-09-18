@@ -6,9 +6,7 @@ import fileUploadMiddleware from "../middleware/fileMiddleware";
 import { validateRequest } from "../middleware/validateRequest";
 import {
     crearCitaValidators, 
-    createDocumentValidators,
-    rescheduleAppointmentValidators, 
-    updateMotivoValidators, 
+    rescheduleAppointmentValidators,
     updateStatusValidators, 
     getHoraValidators
 } from "../middleware/validatorCita";
@@ -20,7 +18,8 @@ const controller = new controllerCita()
 router.post('/create',
      validateToken, 
      isAdminOrPatient, 
-     crearCitaValidators,
+     crearCitaValidators(),
+     validationResult,
      controller.crearCitaController
     );
 router.get('/hour', 
@@ -41,19 +40,7 @@ router.put('/updateStatus',
     validateRequest, 
     controller.updateStatusController
 );
-router.post('/documentos',
-    validateToken,
-    isAdminOrPatient,
-    fileUploadMiddleware(createDocumentValidators),
-    controller.createDocumentController
-);
-router.put('/motivo', 
-    validateToken, 
-    isAdminOrPatient, 
-    updateMotivoValidators, 
-    validationResult,
-    controller.UpdateMotivoController
-);
+
 router.get('/getCita',
     validateToken, 
     isAdminOrPatientOrDoctor,

@@ -16,6 +16,7 @@ export default class citaController {
             this.citaDto.fechaCita = req.body.fechaCita;
             this.citaDto.fKIdDoct = req.body.fKIdDoct;
             this.citaDto.fKIdPac = req.body.fKIdPac;
+            this.citaDto.EmailPac = req.body.EmailPac;
             
             const crearCita = await this.service.crearCita(this.citaDto);
 
@@ -42,21 +43,6 @@ export default class citaController {
             res.status(500).json({ message: 'Error al obtener las horas' });
         }
     
-    }
-
-    deleteCitaController = async (req: Request, res: Response)=>{
-        try {
-            const IdPatient = req.body.IdPatient;
-            const deleteCita = await this.service.deleteCita(IdPatient)
-            if (deleteCita.delete) {
-                res.status(202).json({message: deleteCita.message});
-            } else {
-                res.status(403).json({message: 'error al eliminar la cita'});
-            }
-        } catch (error) {
-            console.log(error.message);
-            res.status(500).json({message: 'error al eliminar la cita'});
-        }
     }
 
     getAllCitasController = async (req: Request, res: Response)=>{
@@ -118,52 +104,5 @@ export default class citaController {
         } catch (error) {
             res.status(505).json({error : error.message});
         }
-    }
-
-    UpdateMotivoController = async (req: Request, res: Response)=>{
-        try {
-            this.citaUpdateDto.codigoCita = req.body.codigoCita;
-            this.citaUpdateDto.motivoCita = req.body.motivoCita;
-
-            const updateMotivo = await this.service.updateMotivo(this.citaUpdateDto);
-            if (updateMotivo) {
-                res.status(202).json({message: updateMotivo.message});
-            }else {
-                res.status(403).json({message: 'error al actualizar el motivo de la cita'});
-            }
-        } catch (error) {
-            res.status(505).json({error : error.message});
-        } 
-    }
-
-    createDocumentController = async (req: Request, res: Response) => {
-        try {
-            const { citaId } = req.body;
-            const fileUrls = req.body.fileUrls;
-    
-            if (!citaId || !fileUrls || fileUrls.length === 0) {
-                return res.status(400).json({ message: 'Faltan datos necesarios' });
-            }
-    
-            // Lógica para asociar los documentos con la cita
-            const documentDtos = fileUrls.map((url: string) => {
-                const doc = new DocumentDto();
-                doc.citaId = citaId;
-                doc.url = url;
-                return doc;
-            });
-    
-            // Guardar documentos en la base de datos
-            const crearDocumentos = await this.service.crearDocumentos(documentDtos);
-    
-            if (crearDocumentos.create) {
-                res.status(200).json({ message: 'Documentos creados con éxito', documentos: crearDocumentos });
-            } else {
-                res.status(500).json({ message: 'Error al crear los documentos' });
-            }
-        } catch (error) {
-            console.error(error.message);
-            res.status(500).json({ message: 'Error al crear los documentos' });
-        }
-    }    
+    } 
 }

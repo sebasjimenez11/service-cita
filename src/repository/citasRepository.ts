@@ -18,7 +18,8 @@ export default class CitasRepository {
             return {
                 create: true,
                 message: 'Creación de cita exitosa',
-                citaId: createdId  // Retornar el ID creado
+                citaId: createdId,  // Retornar el ID creado
+                email: cita.EmailPac
             };
         } catch (error) {
             console.log(error);
@@ -35,16 +36,6 @@ export default class CitasRepository {
         } catch (error) {
             console.log(error.message);
             throw new Error('Error fetching hours'); 
-        }
-    }
-
-    async deleteCita(Id: string) {
-        try {
-            const row = await db.execute('CALL ',[Id]);
-            return {delete: true, message: 'eliminacion de cita exitosa'};
-        } catch (error) {
-            console.log(error.message);
-            throw new Error('Error al eliminar la cita'); 
         }
     }
 
@@ -105,20 +96,6 @@ export default class CitasRepository {
         }
     }
     
-
-    async updateMotivoCita(cita : CitaUpdateDto){
-        try {
-            const row = await db.execute('CALL actualizarMotivoCita(?)',[
-                cita.codigoCita,
-                cita.motivoCita
-            ]);
-            return {update: true, message: 'El motivo de la cita se actualizo correctamente'}
-        } catch (error) {
-            console.error('Error al actualizar el estado de la cita:', error.message);
-            throw new Error('Error al actualizar el estado de la cita');
-        }
-    }
-
     async crearDocumentos(documentDtos: documentosDto[]): Promise<any> {
         const sql = `INSERT INTO documentos (url, citaId) VALUES ?`;
         const values = documentDtos.map((doc) => [doc.url, doc.citaId]);

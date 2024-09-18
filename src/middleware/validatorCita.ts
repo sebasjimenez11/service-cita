@@ -1,7 +1,8 @@
 import { body } from 'express-validator';
 import { query } from 'express-validator';
 
-export const crearCitaValidators = [
+export const crearCitaValidators = () => { 
+    return [
     body('citaId')
         .isString()
         .withMessage('El ID de la cita debe ser string.')
@@ -25,9 +26,11 @@ export const crearCitaValidators = [
         .withMessage('El ID del paciente debe ser numérico.')
         .notEmpty()
         .withMessage('El ID del paciente es requerido.')
-];
+]
+}
 
-export const getHoraValidators = [
+export const getHoraValidators = () =>{
+    return[
     query('fechaCita')
         .isISO8601()
         .withMessage('La fecha debe tener un formato válido (ISO8601).')
@@ -39,10 +42,11 @@ export const getHoraValidators = [
         .withMessage('El ID del médico debe ser string.')
         .notEmpty()
         .withMessage('El ID del médico es requerido.')
-];
+]}
 
 
-export const rescheduleAppointmentValidators = [
+
+export const rescheduleAppointmentValidators = () => {[
     body('citaId')
         .isString()
         .withMessage('El ID de la cita debe ser string.')
@@ -65,9 +69,9 @@ export const rescheduleAppointmentValidators = [
         .isISO8601()
         .withMessage('La fecha debe tener un formato válido (ISO8601).')
         .notEmpty()
-        .withMessage('La fecha de la cita es requerida.')
-];
-
+        .withMessage('La fecha de la cita es requerida.'),
+]
+}
 export const updateStatusValidators = [
     body('citaId')
         .isString()
@@ -86,27 +90,5 @@ export const updateStatusValidators = [
         .withMessage('El correo del paciente debe tener un formato válido.')
         .notEmpty()
         .withMessage('El correo del paciente es requerido.')
-];
-
-export const updateMotivoValidators = [
-    body('citaId')
-        .isString()
-        .withMessage('El ID de la cita debe ser string.')
-        .notEmpty()
-        .withMessage('El ID de la cita es requerido.'),
-
-    body('motivoCita')
-        .isString()
-        .withMessage('El motivo de la cita debe ser un string.')
-        .notEmpty()
-        .withMessage('El motivo de la cita es requerido.')
-];
-
-export const createDocumentValidators = [
-    body('citaId')
-        .isString()
-        .withMessage('El ID de la cita debe ser string.')
-        .notEmpty()
-        .withMessage('El ID de la cita es requerido.'),
 ];
 

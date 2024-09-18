@@ -9,15 +9,16 @@ export default class CitaService {
     private repository = new CitasRepository();
 
     async crearCita(cita: CitaDto){
-        return await this.repository.crearCita(cita);
+        const repository = await this.repository.crearCita(cita);
+        if (repository.create) {
+            azuereShippingEmail(creationEmail('confirmation', repository.email));
+            return repository;
+        }
+        return repository
     }
 
     async getHora(fechaCita : string, IdMedico : string){
         return await this.repository.getHoras(fechaCita, IdMedico);
-    }
-
-    async deleteCita(idPaciente : string){
-        return await this.repository.deleteCita(idPaciente);
     }
 
     async getCitas (IdUser: string, userRol: string){
@@ -32,7 +33,7 @@ export default class CitaService {
         try {
             const reschedule = await this.repository.RescheduleAppointment(cita);
             if (reschedule.Reschedule) {
-                azuereShippingEmail(creationEmail('confirmation',reschedule.email));
+                azuereShippingEmail(creationEmail('reappointment',reschedule.email));
                 return reschedule
             } return reschedule
         } catch (error) {
@@ -45,16 +46,8 @@ export default class CitaService {
         try {
             const updateStatus = await this.repository.updateStatus(cita);
             if (updateStatus.update) {
-                switch (updateStatus.estado) {
-                    case 'confirmada':
-                        azuereShippingEmail(creationEmail('confirmation',updateStatus.email));
-                        return updateStatus;
-                    case 'cancelada':
-                        azuereShippingEmail(creationEmail('cancellation',updateStatus.email));
-                        return updateStatus
-                    default:
-                        return updateStatus
-                }
+                azuereShippingEmail(creationEmail('cancellation',updateStatus.email));
+                return updateStatus
             } return updateStatus;
             }catch (error) {
                 console.error('Error al actualizar el estado:', error.message);
@@ -71,8 +64,4 @@ export default class CitaService {
         }
     }
     
-
-    async updateMotivo(cita: CitaUpdateDto){
-        return await this.repository.updateMotivoCita(cita)
-    }
 }

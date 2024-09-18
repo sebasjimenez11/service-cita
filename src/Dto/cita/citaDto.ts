@@ -4,6 +4,7 @@ export default class CitaDto {
     private _fechaCita: Date;
     private _fKIdDoct: string;
     private _fKIdPac: string;
+    private _EmailPac: string;
 
     constructor() {
         this.codigoCita = this.codigoCita;
@@ -19,6 +20,14 @@ export default class CitaDto {
 
     set codigoCita(codigoCita: number | undefined) {
         this._codigoCita = codigoCita;
+    }
+
+    get EmailPac(): string | undefined {
+        return this._EmailPac;
+    }
+
+    set EmailPac(EmailPac: string | undefined) {
+        this._EmailPac = EmailPac;
     }
 
     get horaCita(): string {
