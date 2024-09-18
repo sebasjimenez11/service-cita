@@ -3,12 +3,6 @@ import { query } from 'express-validator';
 
 export const crearCitaValidators = () => { 
     return [
-    body('citaId')
-        .isString()
-        .withMessage('El ID de la cita debe ser string.')
-        .notEmpty()
-        .withMessage('El ID de la cita es requerido.'),
-    
     body('fechaCita')
         .isISO8601()
         .withMessage('La fecha debe tener un formato válido (ISO8601).')
@@ -16,13 +10,13 @@ export const crearCitaValidators = () => {
         .withMessage('La fecha de la cita es requerida.'),
     
     body('fKIdDoct')
-        .isNumeric()
+        .isString()
         .withMessage('El ID del doctor debe ser numérico.')
         .notEmpty()
         .withMessage('El ID del doctor es requerido.'),
     
     body('fKIdPac')
-        .isNumeric()
+        .isString()
         .withMessage('El ID del paciente debe ser numérico.')
         .notEmpty()
         .withMessage('El ID del paciente es requerido.')

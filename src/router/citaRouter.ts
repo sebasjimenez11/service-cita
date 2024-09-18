@@ -19,12 +19,10 @@ router.post('/create',
      validateToken, 
      isAdminOrPatient, 
      crearCitaValidators(),
-     validationResult,
+     validateRequest,
      controller.crearCitaController
     );
-router.get('/hour', 
-    getHoraValidators, 
-    validateRequest, 
+router.get('/hour',
     controller.getHoraController
 );
 

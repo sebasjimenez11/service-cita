@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "tsc && nodemon dist/app.js",
     "start": "node dist/app.js",
-    "build": "tsc && yarn run copy-certs",
+    "build": "tsc && npm run copy-certs",
     "copy-certs": "cpx ./src/config/certs/**/* ./dist/config/certs",
-    "test": "jest --watchAll"
+    "prestart": "npm run build"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.24.0",

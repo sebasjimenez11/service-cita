@@ -12,6 +12,7 @@ export default class citaController {
     
     crearCitaController = async (req: Request, res: Response) =>{
         try {
+            console.log(req.body); 
             this.citaDto.horaCita = req.body.horaCita;
             this.citaDto.fechaCita = req.body.fechaCita;
             this.citaDto.fKIdDoct = req.body.fKIdDoct;
@@ -34,6 +35,7 @@ export default class citaController {
 
     getHoraController = async (req:Request, res:Response)=>{
         try {
+            console.log(req.params);
             const fechaCita = req.query.fechaCita as string;
             const IdMedico = req.query.IdMedico as string;
             const getHora = await this.service.getHora(fechaCita, IdMedico);

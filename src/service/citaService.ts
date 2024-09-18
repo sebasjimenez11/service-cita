@@ -11,7 +11,7 @@ export default class CitaService {
     async crearCita(cita: CitaDto){
         const repository = await this.repository.crearCita(cita);
         if (repository.create) {
-            azuereShippingEmail(creationEmail('confirmation', repository.email));
+            // azuereShippingEmail(creationEmail('confirmation', repository.email));
             return repository;
         }
         return repository
