@@ -6,7 +6,8 @@ import documentosDto from '../Dto/documento/documentosDto';
 export default class CitasRepository {
     async crearCita(cita: CitaDto) {
         try {
-            const [rows] = await db.execute('CALL CreateAppointment(?,?,?,?)', [
+            const [rows] = await db.execute('CALL CreateAppointment(?,?,?,?,?)', [
+                cita.motivo,
                 cita.horaCita,
                 cita.fechaCita,
                 cita.fKIdDoct,

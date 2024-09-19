@@ -5,6 +5,7 @@ export default class CitaDto {
     private _fKIdDoct: string;
     private _fKIdPac: string;
     private _EmailPac: string;
+    private _motivo: string;
 
     constructor() {
         this.codigoCita = this.codigoCita;
@@ -12,6 +13,7 @@ export default class CitaDto {
         this.fechaCita = this.fechaCita;
         this.fKIdDoct = this.fKIdDoct;
         this.fKIdPac = this.fKIdPac;
+        this.motivo = this.motivo
     }
 
     get codigoCita(): number | undefined {
@@ -60,5 +62,13 @@ export default class CitaDto {
 
     set fKIdPac(fKIdPac: string) {
         this._fKIdPac = fKIdPac;
+    }
+
+    get motivo(): string {
+        return this._motivo;
+    }
+
+    set motivo(motivo: string) {
+        this._motivo = motivo;
     }
 }
