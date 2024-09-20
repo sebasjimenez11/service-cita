@@ -21,8 +21,8 @@ export default class CitaService {
         return await this.repository.getHoras(fechaCita, IdMedico);
     }
 
-    async getCitas (IdUser: string, userRol: string){
-        return await this.repository.getCita(IdUser, userRol);
+    async getCitas (IdUser: string, userRol: string, IdPatient ?: string){
+        return await this.repository.getCita(IdUser, userRol, IdPatient);
     }
 
     async getByCodigoCita (codigoCita:string){

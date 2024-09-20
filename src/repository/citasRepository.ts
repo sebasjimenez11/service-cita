@@ -67,12 +67,16 @@ export default class CitasRepository {
         }
     }
 
-    async getCita(IdUser: string, UserRole: string) {
+    async getCita(IdUser: string, UserRole: string, documentoPac?: string) {
         try {
             let query = "SELECT * FROM vista_cita_completa";
             const queryParams: string[] = [];
             const conditions: string[] = [];
-    
+            
+            if(IdUser && UserRole === 'medico' && documentoPac){
+                conditions.push('idDoctor = ?','documentoPaciente = ?')
+                queryParams.push(IdUser, documentoPac)
+            }
         
             if (IdUser && UserRole === 'medico') {
                 conditions.push("idDoctor = ?");
@@ -87,7 +91,7 @@ export default class CitasRepository {
             if (conditions.length > 0) {
                 query += " WHERE " + conditions.join(" AND ");
             }
-    
+
             // Ejecutar consulta
             const [rows] = await db.execute(query, queryParams);
             return rows;

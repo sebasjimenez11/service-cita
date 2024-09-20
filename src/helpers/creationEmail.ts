@@ -1,7 +1,7 @@
 import EmailDto from "../Dto/email/EmailDto";
 import { messageEmail, buttonUrlValue, buttonTextValue, titleValue, imgUrlValue} from "../config/common/constants/email";
 
-const creationEmail = (typeEmail: string, email: string) => {
+const creationEmail = (typeEmail: string, email: string, paciente?:string, time?:string) => {
     switch (typeEmail) {
         case "confirmation":
             return confirmationEmail(email);
@@ -9,6 +9,8 @@ const creationEmail = (typeEmail: string, email: string) => {
             return cancellationEmail(email);
         case "reappointment":
             return reappointmentEmail(email);
+        case "medicationReminder":
+            return medicationReminder(email, paciente, time)
         default:
             throw new Error(`Email type ${typeEmail} not supported`);
     }
@@ -41,6 +43,16 @@ const reappointmentEmail = (email: string) => {
     const recipients: string = email;
     const buttonText: string = buttonTextValue.reappointment;
     const img: string= imgUrlValue.reappointment;
+    return new EmailDto(message, buttonUrl, title, recipients, buttonText, img);
+};
+
+const medicationReminder = (email: string, paciente: string, time: string) => {
+    const message: string = messageEmail.medicationReminder(paciente, time);
+    const buttonUrl: string = buttonUrlValue.medicationReminder; 
+    const title: string = titleValue.medicationReminder;
+    const recipients: string = email;
+    const buttonText: string = buttonTextValue.medicationReminder;
+    const img: string = imgUrlValue.medicationReminder;
     return new EmailDto(message, buttonUrl, title, recipients, buttonText, img);
 };
 

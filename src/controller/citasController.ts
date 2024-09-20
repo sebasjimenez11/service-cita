@@ -1,3 +1,4 @@
+import { isPatient } from './../middleware/hasRole';
 import { Response, Request } from "express"
 import CitaService from "../service/citaService";
 import CitaDto from "../Dto/cita/citaDto";
@@ -19,6 +20,8 @@ export default class citaController {
             this.citaDto.fKIdDoct = req.body.fKIdDoct;
             this.citaDto.fKIdPac = req.body.fKIdPac;
             this.citaDto.EmailPac = req.body.EmailPac;
+
+            console.log(this.citaDto.EmailPac);
             
             const crearCita = await this.service.crearCita(this.citaDto);
 
@@ -107,4 +110,22 @@ export default class citaController {
             res.status(505).json({error : error.message});
         }
     } 
+
+    getCitaByDocumentPatient = async (req: Request, res: Response)=>{
+        try {
+            const IdUser = req.body.ID;
+            const userRol = req.body.tokenRol;
+            const documentoPac = req.params.documentoPac;
+
+            const getCita = await this.service.getCitas(IdUser,userRol, documentoPac);
+
+            res.status(202).json({citas: getCita})
+
+        } catch (error) {
+            console.log(error.message);
+            res.status(500).json({message: 'error al traer las cita'});
+        }
+    }
+
+
 }

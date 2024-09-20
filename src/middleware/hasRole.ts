@@ -24,3 +24,4 @@ export const isAdminOrPatientOrDoctor = hasRole(['admin', 'paciente', 'medico'])
 export const isDoctor = hasRole(['medico']);
 export const isAdmin = hasRole(['admin']);
 export const isPatient = hasRole(['paciente']);
+export const isPatientOrDoctor = hasRole(['paciente', 'medico']);

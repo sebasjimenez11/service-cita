@@ -1,7 +1,7 @@
 import { Router } from "express";
 import controllerCita from "../controller/citasController";
 import validateToken from "../middleware/verifyToken";
-import { isAdminOrPatient, isAdminOrPatientOrDoctor } from "../middleware/hasRole";
+import { isAdminOrPatient, isAdminOrPatientOrDoctor, isDoctor } from "../middleware/hasRole";
 import fileUploadMiddleware from "../middleware/fileMiddleware";
 import { validateRequest } from "../middleware/validateRequest";
 import {
@@ -44,4 +44,11 @@ router.get('/getCita',
     isAdminOrPatientOrDoctor,
     controller.getByIdCita
 );
+
+router.get('/getByDocument',
+    validateToken, 
+    isDoctor, 
+    controller.getCitaByDocumentPatient
+)
+
 export default router;
