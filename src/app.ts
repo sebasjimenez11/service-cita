@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 10102;
-const HOSTCROON = process.env.HOST_CROON || "http://localhost:10102/medicamentos/getAlarms";
+const HOSTCROON = process.env.HOST_CROON || "service-cita-production.up.railway.app/medicamentos/getAlarms";
 
 import citas from './router/citaRouter';
 import pagos from './router/pagoRouter';
